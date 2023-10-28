@@ -37,7 +37,7 @@ def handle_client(client_socket):
     except:
         del clients[client_socket]
         client_socket.close()
-        client_threads[client_socket].set()  # Signal the thread to exit.
+        client_threads[client_socket].set()
 
 def manage_clients():
     while True:
@@ -58,7 +58,7 @@ def manage_clients():
                     client_socket.send("You have been banned.".encode())
                     del clients[client_socket]
                     client_socket.close()
-                    client_threads[client_socket].set()  # Signal the thread to exit.
+                    client_threads[client_socket].set()
         elif choice == '3':
             username_to_disconnect = input("Enter the username to disconnect: ")
             for client_socket, username in clients.items():
@@ -66,7 +66,7 @@ def manage_clients():
                     client_socket.send("You have been disconnected by the server.".encode())
                     del clients[client_socket]
                     client_socket.close()
-                    client_threads[client_socket].set()  # Signal the thread to exit.
+                    client_threads[client_socket].set()
 
 # Start a thread for managing clients.
 management_thread = threading.Thread(target=manage_clients)
